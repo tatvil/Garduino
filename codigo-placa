@@ -1,0 +1,86 @@
+int IN1 = 2;
+int Pin1 = A0;
+int Pin2 = A1;
+int value1 = 0;
+int value2 = 0;
+int MoistPerc = 0;
+int MoistMin = 1000;
+int MoistMax = 0;
+int CO2Min = 1000;
+int CO2Max = 0;
+int i=0;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(IN1, OUTPUT);
+  pinMode(Pin1, INPUT);
+  pinMode(Pin2, INPUT);
+  digitalWrite(IN1, HIGH);
+
+// Headers of the data
+  Serial.println("CO2 (actual) - min/max MOISTURE - ACTUAL - PERC - NumHigh - Min/Max");
+  Serial.println("======================= ============================================");
+  delay(500);
+}
+
+void loop() {
+  Serial.print("CO2: ");
+  value2 = analogRead(Pin2);
+  Serial.print(value2);
+  if (value2>100)
+    {
+      Serial.print(" High ");
+    }
+  else
+    {
+     Serial.print(" (ok) ");
+    }
+  if(value2CO2Max)
+    {
+    CO2Max = value2;
+    }
+
+  Serial.print (" - ");
+  Serial.print (CO2Min);
+  Serial.print ("/");
+  Serial.print (CO2Max);
+
+  Serial.print(" MOISTURE LVL: ");
+  value1 = analogRead(Pin1);
+  Serial.print(value1);
+
+  if(value1>700)
+    {
+    digitalWrite(IN1, LOW); // This makes the water pump to start working
+    Serial.print("L ");
+    delay(1000); // Only for 1 sec
+    i++; // I'm counting the times that waters the plants
+    digitalWrite(IN1, HIGH); // Afer watering I stop the wattering
+    delay(30000); // for 30 secs so it doesn'm make a mess
+    }
+  else
+    {
+    digitalWrite(IN1, HIGH); // Doesn't water, becase the humidity of the plant is ok
+    Serial.print(" ");
+    }
+
+   MoistPerc = abs((value1 / 10) - 100); // Calculating the percentage of humidity of the plant
+    Serial.print("(");
+    Serial.print(MoistPerc);
+    Serial.print("%) - ");
+    Serial.print(i);
+    Serial.print(" ");
+
+  // Saving the minimun and maximun values, just to know the values we are up t
+  if(value1MoistMax)
+    {
+    MoistMax = value1;
+    }
+
+   Serial.print (" - ");
+   Serial.print (MoistMin);
+   Serial.print ("/");
+   Serial.println (MoistMax);
+
+   delay(1000); // wait 1 second until next measure
+}
