@@ -7,20 +7,15 @@ Arduino es un mini ordenador con un Hardware libre. Esto quiere decir, que quien
 En internet existen un montón de proyectos para realizar. Yo he escogido «Garduino» que es un «Garden Arduino».
 
 Para este proyecto dispongo de:
-
-Arduino Uno
-
-Sensor de CO2
-
-Sensor de humedad en la tierra
-
-Relé
-
-Bomba de agua
-
-Bread board
-
-Cables de conexiones
+<ul>
+  <li>Arduino Uno</li>
+  <li>Sensor de CO2</li>
+  <li>Sensor de humedad en la tierra</li>
+  <li>Relé</li>
+  <li>Bomba de agua</li>
+  <li>Bread board</li>
+  <li>Cables de conexiones</li>
+ </ul>
 
 Para instalar el código hay que realizar las conexiones hardware.
 Despues, desde la app arduino IDE (la puedes descargar en https://www.arduino.cc/en/software )
